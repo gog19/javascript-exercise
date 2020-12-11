@@ -76,9 +76,13 @@ formConverter.addEventListener('submit', function (evt) {
 
 
 var formIdea = document.querySelector('.form-idea');
-var formIdeaTemp = formIdea.querySelector('.form-idea__temp');
-var checkboxRain = formIdea.querySelector('.checkbox-rain');
-var checkboxTrain = formIdea.querySelector('.checkbox-train');
+
+if (formIdea) {
+    var formIdeaTemp = formIdea.querySelector('.form-idea__temp');
+    var checkboxRain = formIdea.querySelector('.checkbox-rain');
+    var checkboxTrain = formIdea.querySelector('.checkbox-train');
+}
+
 var yes = document.querySelector('.yes');
 var no = document.querySelector('.no');
 
@@ -88,6 +92,11 @@ formIdea.addEventListener('change', function () {
     if (formIdeaTemp.value === '') {
         no.style.color = 'red';
         yes.style.color = 'red';
+    }
+    else if (isNaN(formIdeaTemp.value)) {
+        no.style.color = 'red';
+        yes.style.color = 'red';
+        formIdeaTemp.value = '';
     }
     else if (formIdeaTemp.value < 5 && checkboxTrain.checked && checkboxRain.checked) {
         no.style.color = 'red';
@@ -112,6 +121,7 @@ formIdea.addEventListener('change', function () {
     else if (formIdeaTemp.value >= 5 && formIdeaTemp.value <= 30) {
         yes.style.color = 'green';
         no.style.color = 'black';
+        formIdeaTemp.value = '';
     }
     else if (formIdeaTemp.value < 5) {
         no.style.color = 'red';
@@ -121,9 +131,6 @@ formIdea.addEventListener('change', function () {
         no.style.color = 'red';
         yes.style.color = 'black';
     }
-    else if (isNaN(formIdeaTemp.value)) {
-        no.style.color = 'red';
-        yes.style.color = 'red';
-    }
+
 
 });
