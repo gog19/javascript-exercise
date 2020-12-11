@@ -16,18 +16,35 @@ var onPlane = 800;
 elForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
 
-    var onFootDistance = Math.round(Number(elFormDistance.value / onFoot));
-    elResultFoot.textContent = `${onFootDistance} hours`;
+    if (elFormDistance.value === '') {
+        elResultFoot.textContent = 'Enter any number';
+        elResultBicycle.textContent = 'Enter any number';
+        elResultCar.textContent = 'Enter any number';
+        elResultPlane.textContent = 'Enter any number';
+    }
+    else if (!isNaN(elFormDistance.value)) {
+        var onFootDistance = Math.round(Number(elFormDistance.value / onFoot));
+        elResultFoot.textContent = `${onFootDistance} hours`;
 
-    var onBicycleDistance = Math.round(Number(elFormDistance.value / onBicycle));
-    elResultBicycle.textContent = `${onBicycleDistance} hours`;
+        var onBicycleDistance = Math.round(Number(elFormDistance.value / onBicycle));
+        elResultBicycle.textContent = `${onBicycleDistance} hours`;
 
-    var onFootDistance = Math.round(Number(elFormDistance.value / onCar));
-    elResultCar.textContent = `${onFootDistance} hours`;
+        var onFootDistance = Math.round(Number(elFormDistance.value / onCar));
+        elResultCar.textContent = `${onFootDistance} hours`;
 
-    var onFootDistance = Math.round(Number(elFormDistance.value / onPlane));
-    elResultPlane.textContent = `${onFootDistance} hours`;
-    elFormDistance.value = '';
+        var onFootDistance = Math.round(Number(elFormDistance.value / onPlane));
+        elResultPlane.textContent = `${onFootDistance} hours`;
+        elFormDistance.value = '';
+    }
+
+
+    else if (isNaN(elFormDistance)) {
+        elResultFoot.textContent = 'Enter any number';
+        elResultBicycle.textContent = 'Enter any number';
+        elResultCar.textContent = 'Enter any number';
+        elResultPlane.textContent = 'Enter any number';
+    }
+
 })
 
 
@@ -41,7 +58,20 @@ if (formConverter) {
 formConverter.addEventListener('submit', function (evt) {
     evt.preventDefault();
 
-    formResult.textContent = `${Math.round((formInput.value * 9 / 5) + 32)} F`;
+
+    if (formInput.value === '') {
+        formResult.textContent = 'Please enter any number'
+        formInput.value = '';
+    }
+    else if (!isNaN(formInput.value)) {
+        formResult.textContent = `${Math.round((formInput.value * 9 / 5) + 32)} F`;
+        formInput.value = '';
+    }
+    else if (isNaN(formInput.value)) {
+        formResult.textContent = 'Please enter any number'
+        formInput.value = '';
+    }
+
 })
 
 
@@ -55,7 +85,11 @@ var no = document.querySelector('.no');
 formIdea.addEventListener('change', function () {
 
 
-    if (formIdeaTemp.value < 5 && checkboxTrain.checked && checkboxRain.checked) {
+    if (formIdeaTemp.value === '') {
+        no.style.color = 'red';
+        yes.style.color = 'red';
+    }
+    else if (formIdeaTemp.value < 5 && checkboxTrain.checked && checkboxRain.checked) {
         no.style.color = 'red';
         yes.style.color = 'black';
     }
@@ -86,6 +120,10 @@ formIdea.addEventListener('change', function () {
     else if (formIdeaTemp.value <= 5 && checkboxRain.checked && checkboxTrain.checked) {
         no.style.color = 'red';
         yes.style.color = 'black';
+    }
+    else if (isNaN(formIdeaTemp.value)) {
+        no.style.color = 'red';
+        yes.style.color = 'red';
     }
 
 });
